@@ -12,11 +12,11 @@ namespace MatrixSolver
 
         static double[] ReadRow(string input, int row) //Операция считывания строк
         {
-            StreamReader sr = File.OpenText(input); //Инициализация переменной считывания(Открытие файла)
+            StreamReader sr = File.OpenText(input);
 
-            sr.ReadLine(); //Считывание 1 строки
+            sr.ReadLine();  
 
-            for (int i = 0; i < row; i++) //Считывание строк
+            for (int i = 0; i < row; i++)  
                 sr.ReadLine();
 
             string[] data = sr.ReadLine().Split(' '); //Считывание строк чисел с разделением по пробелу
@@ -34,7 +34,7 @@ namespace MatrixSolver
 
         static double[] ReadCol(string input, int col) //Операция считывания столбцов
         {
-            StreamReader sr = File.OpenText(input); //Инициализация переменной считывания(Открытие файла)
+            StreamReader sr = File.OpenText(input);  
 
             string[] header = sr.ReadLine().Split(' ');//Считывание столбцов чисел с разделением по пробелу
 
@@ -57,7 +57,7 @@ namespace MatrixSolver
             return colData;
         }
 
-        static double Mul(double[] rowData, double[] colData) //Операция умножения матриц
+        static double Mul(double[] rowData, double[] colData)  
         {
             double result = 0;
             for (int i = 0; i < rowData.Length; i++) 
@@ -65,9 +65,9 @@ namespace MatrixSolver
             return result;
         }
 
-        static async Task<double> MulAsync(string inputLeft, string inputRight, int row, int col) //Асинхронный метод перемножения матриц
+        static async Task<double> MulAsync(string inputLeft, string inputRight, int row, int col)  
         {
-            double[] rowData, colData; //Инициализация переменных для строк 1 матрицы и столбцов 2 матрицы
+            double[] rowData, colData;  
 
             rowData = await Task.Run(() => ReadRow(inputLeft, row)); //Выполнение асинхронной задачи по считыванию строк 1 матрицы
 
@@ -85,12 +85,12 @@ namespace MatrixSolver
             sr.Close();
 
             sr = File.OpenText(inputRight); //Запись правой матрицы в sr
-            input = sr.ReadLine().Split(' '); //Заполнение массива чисел-числами из матрицы
-            int rowsRight = int.Parse(input[0]);  //Нахождение кол-ва строк правой матрицы
-            int colsRight = int.Parse(input[1]);  //Нахождение кол-ва столбцов правой матрицы
+            input = sr.ReadLine().Split(' ');  
+            int rowsRight = int.Parse(input[0]);  
+            int colsRight = int.Parse(input[1]);   
             sr.Close();
 
-            if ((rowsLeft != colsRight) || (colsLeft != rowsRight)) //Если количество строк и столбцов не совпадает то вывести ошибку
+            if ((rowsLeft != colsRight) || (colsLeft != rowsRight))  
                 throw new Exception("Matrix cols and rows does not equal.");
 
             StreamWriter sw = new StreamWriter(output); // Инициализация файла результата
@@ -104,9 +104,9 @@ namespace MatrixSolver
                 
                 double[] results = await Task.WhenAll<double>(mulTasks); //Инициализация массива результатов 
 
-                sw.WriteLine(String.Join(" ", results)); //Запись в файл соединённых символом " " значений
+                sw.WriteLine(String.Join(" ", results));  
             }
-            sw.Close();//Закрытие файла
+            sw.Close(); 
         }
     }
 }
