@@ -71,7 +71,7 @@ namespace MatrixSolver
 
             rowData = await Task.Run(() => ReadRow(inputLeft, row)); //Выполнение асинхронной задачи по считыванию строк 1 матрицы
 
-            colData = await Task.Run(() => ReadCol(inputRight, col)); //Выполнение асинхронной задачи по считыванию столбцов 2 матрицы
+            colData = await Task.Run(() => ReadCol(inputRight, col));  
 
             return await Task.Run<double>(() => Mul(rowData, colData)); //Асинхронное возвращение результата умножения матриц 
         }
@@ -84,7 +84,7 @@ namespace MatrixSolver
             int colsLeft = int.Parse(input[1]); //Нахождение кол-ва столбцов левой матрицы
             sr.Close();
 
-            sr = File.OpenText(inputRight); //Запись правой матрицы в sr
+            sr = File.OpenText(inputRight); 
             input = sr.ReadLine().Split(' ');  
             int rowsRight = int.Parse(input[0]);  
             int colsRight = int.Parse(input[1]);   
